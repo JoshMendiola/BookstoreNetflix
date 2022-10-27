@@ -21,8 +21,8 @@ public class Author implements Serializable
     private int author_id;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "artist_id")
-    private Set<Author> authors = new HashSet<>();
+    @JoinColumn(name = "author_id")
+    private Set<Book> books = new HashSet<>();
 
     private String firstName;
     private String lastName;
