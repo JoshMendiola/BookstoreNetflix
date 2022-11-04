@@ -13,15 +13,23 @@ import java.util.Set;
 public class Publisher implements Serializable
 {
     @Id
-    @Column(name = "publisher_id")
+    @Column(name = "publisher_id",  insertable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "author_id")
-    private Set<Author> albums = new HashSet<>();
-
     private int publisher_id;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "state")
+    private String state;
+    @Column(name = "postal_code")
+    private int postalCode;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "street")
+    private String street;
 
     public void setName(String name)
     {
@@ -58,22 +66,18 @@ public class Publisher implements Serializable
         this.email = email;
     }
 
-    private String name;
-    private String street;
-
-    public int getId()
+    public int getPublisherId()
     {
-        return id;
-    }
-
-    public Set<Author> getAlbums()
-    {
-        return albums;
+        return publisher_id;
     }
 
     public int getPublisher_id()
     {
         return publisher_id;
+    }
+    public void setPublisher_id(int publisher_id)
+    {
+        this.publisher_id = publisher_id;
     }
 
     public String getName()
@@ -110,10 +114,4 @@ public class Publisher implements Serializable
     {
         return email;
     }
-
-    private String city;
-    private String state;
-    private int postalCode;
-    private String phone;
-    private String email;
 }

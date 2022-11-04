@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -17,12 +15,16 @@ public class Book implements Serializable
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int book_id;
-
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id",insertable = false, updatable = false)
+    private Author author;
+    @Column(name = "isbn")
     private int isbn;
+    @Column(name = "publish_date")
     private String publish_date;
-    private int author_id;
+    @Column(name = "title")
     private String title;
-    private int publisher_id;
+    @Column(name = "price")
     private int price;
 
     public int getBook_id()
@@ -40,19 +42,34 @@ public class Book implements Serializable
         return publish_date;
     }
 
-    public int getAuthor_id()
+    public void setBook_id(int book_id)
     {
-        return author_id;
+        this.book_id = book_id;
+    }
+
+    public void setAuthor(Author author)
+    {
+        this.author = author;
+    }
+
+    public void setIsbn(int isbn)
+    {
+        this.isbn = isbn;
+    }
+
+    public void setPublish_date(String publish_date)
+    {
+        this.publish_date = publish_date;
+    }
+
+    public Author getAuthor()
+    {
+        return author;
     }
 
     public String getTitle()
     {
         return title;
-    }
-
-    public int getPublisher_id()
-    {
-        return publisher_id;
     }
 
     public int getPrice()
@@ -63,11 +80,6 @@ public class Book implements Serializable
     public void setTitle(String title)
     {
         this.title = title;
-    }
-
-    public void setPublisher_id(int publisher_id)
-    {
-        this.publisher_id = publisher_id;
     }
 
     public void setPrice(int price)

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,64 +17,44 @@ public class Author implements Serializable
     @Id
     @Column(name = "author_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int author_id;
-
+    private int id;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
     private Set<Book> books = new HashSet<>();
-
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+    @Column(name = "street", nullable = false)
     private String street;
+    @Column(name = "city", nullable = false)
     private String city;
+    @Column(name = "state", nullable = false)
     private String state;
-    private int postalCode;
+    @Column(name = "postal_code", nullable = false)
+    private String postalCode;
+    @Column(name = "phone", nullable = false)
     private String phone;
+    @Column(name = "email", nullable = false)
     private String email;
-
-    public int getAuthor_id()
+    public void setId(int id)
     {
-        return author_id;
+        this.id = id;
     }
 
-    public String getFirstName()
+    public void setBooks(Set<Book> books)
     {
-        return firstName;
+        this.books = books;
     }
 
-    public String getLastName()
+    public void setFirstName(String firstName)
     {
-        return lastName;
+        this.firstName = firstName;
     }
 
-    public String getStreet()
+    public void setLastName(String lastName)
     {
-        return street;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public String getState()
-    {
-        return state;
-    }
-
-    public int getPostalCode()
-    {
-        return postalCode;
-    }
-
-    public String getPhone()
-    {
-        return phone;
-    }
-
-    public String getEmail()
-    {
-        return email;
+        this.lastName = lastName;
     }
 
     public void setStreet(String street)
@@ -93,7 +72,7 @@ public class Author implements Serializable
         this.state = state;
     }
 
-    public void setPostalCode(int postalCode)
+    public void setPostalCode(String postalCode)
     {
         this.postalCode = postalCode;
     }
@@ -108,15 +87,72 @@ public class Author implements Serializable
         this.email = email;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getAuthor_id(),getFirstName(),getLastName(),getStreet(),getCity(),getState(),getPostalCode(),getPhone(),getEmail());
+    public int getId()
+    {
+        return id;
+    }
+    public String getFirstName()
+    {
+        return firstName;
+    }
+    public String getLastName()
+    {
+        return lastName;
+    }
+    public String getStreet()
+    {
+        return street;
+    }
+    public String getCity()
+    {
+        return city;
+    }
+    public String getState()
+    {
+        return state;
+    }
+    public String getPostalCode()
+    {
+        return postalCode;
+    }
+    public String getPhone()
+    {
+        return phone;
+    }
+    public String getEmail()
+    {
+        return email;
+    }
+    public Set<Book> getBooks()
+    {
+        return books;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(),getFirstName(),getLastName(),getStreet(),getCity(),getState(),getPostalCode(),getPhone(),getEmail(), getBooks());
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return getAuthor_id() == author.getAuthor_id();
+        return getId() == author.getId();
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "authorId=" + id +
+                ", First Name='" + firstName + '\'' +
+                ", Last Name='" + lastName + '\'' +
+                ", Street='" + street + '\'' +
+                ", City='" + city + '\'' +
+                ", State='" + state + '\'' +
+                ", Postal Code='" + postalCode + '\'' +
+                ", Phone='" + phone + '\'' +
+                ", Email='" + email + '\'' +
+                '}';
     }
 }
