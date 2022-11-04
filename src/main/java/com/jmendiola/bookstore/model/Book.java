@@ -11,6 +11,18 @@ import java.io.Serializable;
 
 public class Book implements Serializable
 {
+    public Book() {}
+
+    public Book(int book_id, Author author, int isbn, String publish_date, String title, int price)
+    {
+        this.book_id = book_id;
+        this.author = author;
+        this.isbn = isbn;
+        this.publish_date = publish_date;
+        this.title = title;
+        this.price = price;
+    }
+
     @Id
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

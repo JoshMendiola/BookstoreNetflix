@@ -17,7 +17,8 @@ public class PublisherController
     PublisherRepository repo;
 
     @GetMapping("/publisher")
-    public List<Publisher> getPublishers() {
+    public List<Publisher> getPublisher() {
+        System.out.println(repo.count());
         return repo.findAll();
     }
 

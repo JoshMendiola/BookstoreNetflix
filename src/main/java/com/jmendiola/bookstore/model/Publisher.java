@@ -12,6 +12,21 @@ import java.util.Set;
 @Table(name = "publisher")
 public class Publisher implements Serializable
 {
+
+    public Publisher() {}
+
+    public Publisher(int publisher_id, String city, String state, int postalCode, String phone, String email, String name, String street)
+    {
+        this.publisher_id = publisher_id;
+        this.city = city;
+        this.state = state;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.street = street;
+    }
+
     @Id
     @Column(name = "publisher_id",  insertable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

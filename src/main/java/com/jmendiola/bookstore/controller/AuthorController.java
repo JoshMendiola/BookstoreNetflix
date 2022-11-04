@@ -24,11 +24,7 @@ public class AuthorController
     public Author getAuthorById(@PathVariable int id) {
         Optional<Author> returnVal = repo.findById(id);
         System.out.println(repo.count());
-        if (returnVal.isPresent()) {
-            return returnVal.get();
-        } else {
-            return null;
-        }
+        return returnVal.orElse(null);
     }
 
     @PostMapping("/author")
